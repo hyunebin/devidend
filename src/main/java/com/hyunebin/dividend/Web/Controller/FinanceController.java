@@ -1,4 +1,4 @@
-package com.hyunebin.dividend.web.controller;
+package com.hyunebin.dividend.Web.Controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
