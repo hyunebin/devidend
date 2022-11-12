@@ -10,8 +10,7 @@ public class DividendApplication {
     public static void main(String[] args) {
         //SpringApplication.run(DividendApplication.class, args);
         YahooFinanceScarper scarper = new YahooFinanceScarper();
-        Company company = Company.builder().ticker("O").build();
-        var scrapedResult  = scarper.scrap(company);
+        var scrapedResult  = scarper.scrapCompanyByTicker("MMM");
         System.out.println(scrapedResult);
     }
 }

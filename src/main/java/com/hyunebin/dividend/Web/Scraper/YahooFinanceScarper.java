@@ -13,10 +13,12 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-public class YahooFinanceScarper {
+public class YahooFinanceScarper implements Scarper {
     private static final String URL ="https://finance.yahoo.com/quote/%s/history?period1=%d&period2=%d&interval=1mo";
+    private static final String TICKER_URL = "https://finance.yahoo.com/quote/%s?p=%s";
     private static final long START_TIME = 86400;
 
 
@@ -76,6 +78,22 @@ public class YahooFinanceScarper {
     }
 
     public Company scrapCompanyByTicker(String ticker){
-        return null;
+
+        String url = String.format(TICKER_URL, ticker, ticker);
+        try {
+            Document document =  Jsoup.connect(url).get();
+            Element titleElement = document.getElementsByTag("h1").get(0);
+            String title = titleElement.text().split(" ")[0].trim();
+
+
+            return Company.builder()
+                    .ticker(ticker)
+                    .name(title)
+                    .build();
+
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
