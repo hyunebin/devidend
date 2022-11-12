@@ -1,4 +1,4 @@
-package com.hyunebin.dividend.Web.Persist.entity;
+package com.hyunebin.dividend.Web.Persist.Entity;
 
 
 import lombok.Getter;
