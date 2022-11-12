@@ -9,6 +9,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@Component
 public class YahooFinanceScarper implements Scarper {
     private static final String URL ="https://finance.yahoo.com/quote/%s/history?period1=%d&period2=%d&interval=1mo";
     private static final String TICKER_URL = "https://finance.yahoo.com/quote/%s?p=%s";
@@ -83,7 +85,7 @@ public class YahooFinanceScarper implements Scarper {
         try {
             Document document =  Jsoup.connect(url).get();
             Element titleElement = document.getElementsByTag("h1").get(0);
-            String title = titleElement.text().split(" ")[0].trim();
+            String title = titleElement.text();
 
 
             return Company.builder()
