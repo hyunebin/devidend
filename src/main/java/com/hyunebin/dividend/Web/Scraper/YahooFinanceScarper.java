@@ -65,9 +65,7 @@ public class YahooFinanceScarper implements Scarper {
 
 
                 //Builder pattern
-                dividendList.add( Dividend.builder()
-                        .localDateTime(LocalDateTime.of(year,month,day,0,0))
-                        .dividend(dividend).build());
+                dividendList.add(new Dividend(LocalDateTime.of(year,month,day,0,0), dividend));
             }
 
             scrapedResult.setDividendList(dividendList);
@@ -88,11 +86,7 @@ public class YahooFinanceScarper implements Scarper {
             String title = titleElement.text();
 
 
-            return Company.builder()
-                    .ticker(ticker)
-                    .name(title)
-                    .build();
-
+            return new Company(ticker, title);
 
         } catch (IOException e) {
             throw new RuntimeException(e);
