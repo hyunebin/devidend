@@ -5,6 +5,7 @@ import com.hyunebin.dividend.Web.Persist.Entity.DividendEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,4 +13,6 @@ import java.util.Optional;
 public interface DividendRepository extends JpaRepository<DividendEntity, Long> {
 
     List<DividendEntity> findAllByCompanyId(Long CompanyId);
+
+    boolean existsByCompanyIdAndDate(Long companyId, LocalDateTime dateTime);
 }
