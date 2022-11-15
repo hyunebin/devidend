@@ -21,7 +21,8 @@ public class CompanyController {
 
     @GetMapping("/autocomplete")
     public ResponseEntity<?> autocomplete(@RequestParam String keyword){
-        return null;
+        var result = companyService.autoComplete(keyword);
+        return ResponseEntity.ok(result);
     }
 
     @GetMapping()
@@ -33,6 +34,7 @@ public class CompanyController {
 
     }
 
+
     /**
      * 회사 및 배당금 정보 추가
      * **/
@@ -43,8 +45,10 @@ public class CompanyController {
             throw new RuntimeException("ticker 값이 존재하지 않습니다.");
         }
 
-        Company company = companyService.save(ticker);
 
+
+        Company company = companyService.save(ticker);
+        companyService.addAutoComplete(company.getName());
         return ResponseEntity.ok(company);
     }
 

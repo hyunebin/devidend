@@ -12,4 +12,10 @@ public interface CompanyService {
     Company storeCompanyAndDividend(String ticker);
 
     Page<CompanyEntity> getAllCompany(final Pageable pageable);
+
+    public void addAutoComplete(String keyword);
+
+    public List<String> autoComplete(String keyword);
+
+    public void deleteAutoCompleteKeyword(String keyword);
 }

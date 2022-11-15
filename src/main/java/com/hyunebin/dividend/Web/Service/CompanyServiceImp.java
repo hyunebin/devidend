@@ -9,6 +9,7 @@ import com.hyunebin.dividend.Web.Repository.Company.CompanyRepository;
 import com.hyunebin.dividend.Web.Repository.Dividend.DividendRepository;
 import com.hyunebin.dividend.Web.Scraper.Scarper;
 import lombok.AllArgsConstructor;
+import org.apache.commons.collections4.Trie;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -25,7 +26,22 @@ public class CompanyServiceImp implements CompanyService {
     private final Scarper yahooFinanceScarper;
     private final CompanyRepository companyRepository;
     private final DividendRepository dividendRepository;
+    private final Trie trie;
 
+    @Override
+    public void addAutoComplete(String keyword) {
+        trie.put(keyword, null);
+    }
+
+    @Override
+    public List<String> autoComplete(String keyword) {
+        return (List<String>) trie.prefixMap(keyword).keySet().stream().collect(Collectors.toList());
+    }
+
+    @Override
+    public void deleteAutoCompleteKeyword(String keyword) {
+        trie.remove(keyword);
+    }
 
     @Override
     public Company save(String ticker) {
@@ -36,8 +52,6 @@ public class CompanyServiceImp implements CompanyService {
 
         return storeCompanyAndDividend(ticker);
     }
-
-
 
     @Override
     public Company storeCompanyAndDividend(String ticker) {
