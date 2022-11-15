@@ -9,6 +9,8 @@ import com.hyunebin.dividend.Web.Repository.Company.CompanyRepository;
 import com.hyunebin.dividend.Web.Repository.Dividend.DividendRepository;
 import com.hyunebin.dividend.Web.Scraper.Scarper;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,6 +37,8 @@ public class CompanyServiceImp implements CompanyService {
         return storeCompanyAndDividend(ticker);
     }
 
+
+
     @Override
     public Company storeCompanyAndDividend(String ticker) {
         //ticker를 통해 회사 정보 스크랩핑
@@ -57,5 +61,10 @@ public class CompanyServiceImp implements CompanyService {
         dividendRepository.saveAll(dividendEntities);
 
         return company;
+    }
+
+    @Override
+    public Page<CompanyEntity> getAllCompany(Pageable pageable) {
+        return companyRepository.findAll(pageable);
     }
 }
