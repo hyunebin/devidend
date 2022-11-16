@@ -18,4 +18,6 @@ public interface CompanyService {
     public List<String> autoComplete(String keyword);
 
     public void deleteAutoCompleteKeyword(String keyword);
+
+    public String deleteCompany(String ticker);
 }

@@ -78,6 +78,18 @@ public class CompanyServiceImp implements CompanyService {
     }
 
     @Override
+    public String deleteCompany(String ticker) {
+        var result = companyRepository.findByTicker(ticker).orElseThrow(()->new RuntimeException("존재하지 않는 회사입니다."));
+
+        dividendRepository.deleteAllByCompanyId(result.getId());
+        companyRepository.delete(result);
+
+        deleteAutoCompleteKeyword(result.getName());
+
+        return result.getName();
+    }
+
+    @Override
     public Page<CompanyEntity> getAllCompany(Pageable pageable) {
         return companyRepository.findAll(pageable);
     }
