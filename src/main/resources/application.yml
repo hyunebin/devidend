@@ -15,5 +15,16 @@ spring:
 
   datasource:
     driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:dividend
     username: sa
     password:
+  redis:
+    host: localhost
+    port: 6379
+  jwt:
+    secret: 111111111111
+
+
+scheduler:
+ scrap:
+   yahoo : "* 5 * * * *"

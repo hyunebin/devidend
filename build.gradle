@@ -16,7 +16,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.jsoup:jsoup:1.15.3'
-    //implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
     // https://mvnrepository.com/artifact/org.apache.commons/commons-collections4
     implementation 'org.apache.commons:commons-collections4:4.3'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
@@ -25,6 +25,10 @@ dependencies {
     // https://mvnrepository.com/artifact/org.springframework.data/spring-data-redis
     implementation 'org.springframework.data:spring-data-redis:2.7.5'
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+// https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
+    implementation 'io.jsonwebtoken:jjwt-jackson:0.11.2'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.2'
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor('org.projectlombok:lombok')
